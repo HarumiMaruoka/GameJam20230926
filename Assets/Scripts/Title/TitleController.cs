@@ -16,6 +16,8 @@ public class TitleController : MonoBehaviour
     private Image _fadeImage;
     [SerializeField] private float _fadeTime;
 
+    [SerializeField] private Animator _startAnim;
+    
     private void Start()
     {
         // タイトルシーン開始時の処理をここに記述する。
@@ -32,7 +34,7 @@ public class TitleController : MonoBehaviour
     {
         if (Input.GetButtonDown(_spaceInputName))
         {
-            Step();
+            _startAnim.SetBool("IsStart",true);
         }
     }
 
