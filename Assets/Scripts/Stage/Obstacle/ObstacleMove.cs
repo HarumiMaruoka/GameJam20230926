@@ -10,8 +10,9 @@ public class ObstacleMove : MonoBehaviour
     [SerializeField] float _moveSpeed;
     [SerializeField] private float _endPos;
 
-    private void Start()
+    public void Instantiate(float mag)
     {
+        _moveSpeed *= mag;
         Move();
     }
 

@@ -10,14 +10,17 @@ using Random = UnityEngine.Random;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _obstacles;
+    [Header("障害物")]
+    [SerializeField] private ObstacleMove[] _obstacles;
     [SerializeField] private float _generateInterval;
     [SerializeField] private Vector2 _generatePos = new Vector2(10, 0);
+
+    [SerializeField] private GameSpeedController _gameSpeedController;
 
 
     private async void Start()
     {
-       await GenerateLoop();
+        await GenerateLoop();
     }
 
     private async UniTask GenerateLoop()
@@ -29,12 +32,13 @@ public class ObstacleGenerator : MonoBehaviour
             {
                 GenerateObstacle();
             }
-            //GenerateObstacle();
         }
     }
 
     void GenerateObstacle()
     {
-        Instantiate(_obstacles[Random.Range(0,_obstacles.Length)],_generatePos, Quaternion.identity);
+        ObstacleMove ob = Instantiate(_obstacles[Random.Range(0, _obstacles.Length)], _generatePos,
+            Quaternion.identity);
+        ob.Instantiate(_gameSpeedController.CurrentSpeed);
     }
 }
