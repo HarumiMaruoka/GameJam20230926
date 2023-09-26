@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
     [SerializeField, SceneName]
     private string _titleSceneName;
     [SerializeField]
+    private PlayerCollisionHandler _collisionHandler;
+    [SerializeField]
     private Image _fadeImage;
     [SerializeField]
     private float _fadeTime;
@@ -23,10 +25,15 @@ public class GameController : MonoBehaviour
     private void OnEnable()
     {
         GameStatusController.OnStatusChanged += ApllyCurrentGameStatusText;
+        if (_collisionHandler)
+            _collisionHandler.OnHitObstacle += GameOver;
     }
+
     private void OnDisable()
     {
         GameStatusController.OnStatusChanged -= ApllyCurrentGameStatusText;
+        if (_collisionHandler)
+            _collisionHandler.OnHitObstacle -= GameOver;
     }
 
     private void Start()
@@ -49,11 +56,22 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        // ゲームプレイ中以外の時スペースキーで状態遷移。
         if (Input.GetButtonDown(_spaceInputName))
         {
-            Step();
-            return;
+            var currentStatus = GameStatusController.Current;
+
+            if (currentStatus != GameStatus.Play)
+            {
+                Step();
+                return;
+            }
         }
+    }
+
+    public void OnDestroy()
+    {
+        DOTween.KillAll();
     }
 
     private void FadeIn(Action onComplete)
@@ -68,7 +86,6 @@ public class GameController : MonoBehaviour
     private void Step()
     {
         var currentStatus = GameStatusController.Current;
-
 
         // None→ StartPerformance→ Play→ EndPerformance→ End→ None ...という流れで進行する。
         switch (currentStatus)
@@ -96,6 +113,15 @@ public class GameController : MonoBehaviour
         if (_currentGameStatusText)
         {
             _currentGameStatusText.text = status.ToString();
+        }
+    }
+
+    private void GameOver()
+    {
+        var currentStatus = GameStatusController.Current;
+        if (currentStatus == GameStatus.Play)
+        {
+            Step();
         }
     }
 }
