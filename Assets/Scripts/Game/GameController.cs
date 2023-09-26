@@ -1,4 +1,5 @@
 // 日本語対応
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Glib.InspectorExtension;
 using System;
@@ -43,6 +44,8 @@ public class GameController : MonoBehaviour
         ApllyCurrentGameStatusText(GameStatusController.Current);
         _fadeImage.gameObject.SetActive(true);
         FadeOut(() => _fadeImage.gameObject.SetActive(false));
+
+        PlayStartPerformance(() => GameStatusController.ChangeGameStatus(GameStatus.Play));
     }
 
     private void Update()
@@ -56,12 +59,11 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        // ゲームプレイ中以外の時スペースキーで状態遷移。
         if (Input.GetButtonDown(_spaceInputName))
         {
             var currentStatus = GameStatusController.Current;
 
-            if (currentStatus != GameStatus.Play)
+            if (currentStatus == GameStatus.EndPerformance)
             {
                 Step();
                 return;
@@ -108,6 +110,37 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private float _startPerformanceTimer = 0f;
+    private float _startTime = 3f;
+    [SerializeField]
+    private Text _startPerformanceTimeText;
+    private async void PlayStartPerformance(Action onComplete = null)
+    {
+        _startPerformanceTimeText.gameObject.SetActive(true);
+        _startPerformanceTimer = _startTime;
+
+        while (_startPerformanceTimer >= 0f)
+        {
+            try
+            {
+                _startPerformanceTimer -= Time.deltaTime;
+                _startPerformanceTimeText.text = _startPerformanceTimer.ToString("0.0");
+                await UniTask.Yield(this.GetCancellationTokenOnDestroy());
+            }
+            catch (OperationCanceledException)
+            {
+                return;
+            }
+        }
+
+        _startPerformanceTimeText.gameObject.SetActive(false);
+        onComplete?.Invoke();
+    }
+    private void PlayEndPerformance(Action onComplete = null)
+    {
+
+    }
+
     private void ApllyCurrentGameStatusText(GameStatus status)
     {
         if (_currentGameStatusText)
@@ -121,7 +154,7 @@ public class GameController : MonoBehaviour
         var currentStatus = GameStatusController.Current;
         if (currentStatus == GameStatus.Play)
         {
-            Step();
+            GameStatusController.ChangeGameStatus(GameStatus.EndPerformance);
         }
     }
 }
