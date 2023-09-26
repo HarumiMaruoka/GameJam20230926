@@ -23,6 +23,10 @@ public class TitleController : MonoBehaviour
         _fadeImage.gameObject.SetActive(true);
         FadeOut(() => _fadeImage.gameObject.SetActive(false));
     }
+    private void OnDestroy()
+    {
+        DOTween.KillAll();
+    }
 
     private void Update()
     {
