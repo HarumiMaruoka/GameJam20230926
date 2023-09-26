@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using UnityEngine.Rendering.Universal;
+
 
 public class ScoreController : MonoBehaviour
 {
@@ -29,7 +29,6 @@ public class ScoreController : MonoBehaviour
     {
         if (_feverEnabled) return;
         _scoreItemCount++;
-        //_feverSlider.value = _scoreItemCount / _happenFeverCount;
         _feverSlider.DOValue(_scoreItemCount / _happenFeverCount, 1f);
         if (_scoreItemCount >= _happenFeverCount)
         {
@@ -44,7 +43,6 @@ public class ScoreController : MonoBehaviour
             .OnComplete(() =>
             {
                 _feverEnabled = false;
-                Debug.Log("I‚í‚Á‚½");
             });
     }
 
