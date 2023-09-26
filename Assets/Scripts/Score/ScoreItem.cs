@@ -17,11 +17,4 @@ public class ScoreItem : MonoBehaviour
             scoreController.AddScore(_score);
         } //プレイヤーがアイテムにぶつかったときScoreControllerのAddScoreメソッドが呼ばれる
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            scoreController.AddScore(_score);
-        }
-    }
 }
