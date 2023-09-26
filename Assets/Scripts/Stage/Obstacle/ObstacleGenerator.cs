@@ -1,20 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject[] Obstacles;
+    [SerializeField] private GameObject[] _obstacles;
     [SerializeField] private float _generateInterval;
     [SerializeField] private Vector2 _generatePos = new Vector2(10, 0);
 
-    private void Start()
+    private async Task Start()
     {
-        GenerateLoop();
+       await GenerateLoop();
     }
 
     private async UniTask GenerateLoop()
@@ -22,12 +24,15 @@ public class ObstacleGenerator : MonoBehaviour
         while (true)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_generateInterval));
-            GenerateObstacle();
+            if (GameStatusController.Current == GameStatus.Play)
+            {
+                GenerateObstacle();
+            }
         }
     }
 
     void GenerateObstacle()
     {
-        Instantiate(Obstacles[Random.Range(0,Obstacles.Length)],_generatePos, Quaternion.identity);
+        Instantiate(_obstacles[Random.Range(0,_obstacles.Length)],_generatePos, Quaternion.identity);
     }
 }
