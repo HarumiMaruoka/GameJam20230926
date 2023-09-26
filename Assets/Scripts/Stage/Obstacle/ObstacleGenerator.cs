@@ -14,7 +14,8 @@ public class ObstacleGenerator : MonoBehaviour
     [SerializeField] private float _generateInterval;
     [SerializeField] private Vector2 _generatePos = new Vector2(10, 0);
 
-    private async Task Start()
+
+    private async void Start()
     {
        await GenerateLoop();
     }
@@ -28,6 +29,7 @@ public class ObstacleGenerator : MonoBehaviour
             {
                 GenerateObstacle();
             }
+            //GenerateObstacle();
         }
     }
 
