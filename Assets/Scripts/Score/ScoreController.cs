@@ -9,23 +9,50 @@ public class ScoreController : MonoBehaviour
 {
     [SerializeField] Text _scoreText;
     [SerializeField] float _countScoreTimer;
+    [SerializeField] float _feverTime;
+    [SerializeField] int _happenFeverCount;
+    [SerializeField] Slider _feverSlider;
+    bool _feverEnabled = false;
+    float _scoreItemCount;
     int _totalScore; //スコアの合計
     public int Score => _totalScore;
+    public bool FeverEnabled => _feverEnabled;
     public void AddScore(int value)
     {
         int _startScore = _totalScore;
         _totalScore += value;
         StartCoroutine(Enumerator(_startScore, _totalScore));
-        //_totalScore += value;
-        //_scoreText.text = _totalScore.ToString("00000");
+        //ItemCount();
     } //アイテムを取得した時に_totalScoreにスコアを追加する
+
+    public void ItemCount()
+    {
+        if (_feverEnabled) return;
+        _scoreItemCount++;
+        //_feverSlider.value = _scoreItemCount / _happenFeverCount;
+        _feverSlider.DOValue(_scoreItemCount / _happenFeverCount, 1f);
+        if (_scoreItemCount >= _happenFeverCount)
+        {
+            _feverEnabled = true;
+            Invoke(nameof(StartFever), 1f);
+            _scoreItemCount = 0;
+        }
+    }
+    void StartFever()
+    {
+        _feverSlider.DOValue(0, _feverTime)
+            .OnComplete(() =>
+            {
+                _feverEnabled = false;
+                Debug.Log("終わった");
+            });
+    }
 
     IEnumerator Enumerator(int startScore, int endScore)
     {
         float startTime = Time.time;
         // 終了時間
         float endTime = startTime + _countScoreTimer;
-
         do
         {
             float timeRate = (Time.time - startTime) / _countScoreTimer;

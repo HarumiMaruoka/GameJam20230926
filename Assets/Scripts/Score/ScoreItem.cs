@@ -6,21 +6,23 @@ using UnityEngine;
 public class ScoreItem : MonoBehaviour
 {
     [SerializeField, TagName] string _playerTag;
-    ScoreController scoreController;
+    ScoreController ScoreController;
     //スコアコントローラーがついているオブジェクトをアタッチする
     [SerializeField] int _score = 0;
     //アイテムのスコアの値
 
     void Start()
     {
-        scoreController = FindObjectOfType<ScoreController>();
+        ScoreController = FindObjectOfType<ScoreController>();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == _playerTag)
         {
-            scoreController.AddScore(_score);
+            ScoreController.AddScore(_score);
             Destroy(this.gameObject);
+            if (this.gameObject.tag == "FeverItem") return;
+            ScoreController.ItemCount();
         } //プレイヤーがアイテムにぶつかったときScoreControllerのAddScoreメソッドが呼ばれる
     }
 }

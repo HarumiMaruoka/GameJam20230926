@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8898832166787042308
+--- !u!1 &4367592418800162771
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8032065501235039291}
-  - component: {fileID: 482182715020098337}
-  - component: {fileID: 4014634812615455438}
-  - component: {fileID: 8797587517389484396}
+  - component: {fileID: 6202365244220463207}
+  - component: {fileID: 2759075225399825433}
+  - component: {fileID: 5874915173595066382}
+  - component: {fileID: 3508309484374812592}
   m_Layer: 0
-  m_Name: Item_Score100
-  m_TagString: Untagged
+  m_Name: FeverItem Score200
+  m_TagString: FeverItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8032065501235039291
+--- !u!4 &6202365244220463207
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8898832166787042308}
+  m_GameObject: {fileID: 4367592418800162771}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.1471233, y: 1.945132, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &482182715020098337
+--- !u!212 &2759075225399825433
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8898832166787042308}
+  m_GameObject: {fileID: 4367592418800162771}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,24 +75,24 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 987ca5cf58a4bc94ab027fa7277e603b, type: 3}
-  m_Color: {r: 1, g: 0.84163606, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 93bf646a60a7d3e4db96e5c2b0290fd5, type: 3}
+  m_Color: {r: 0.1756115, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1.5, y: 1}
+  m_Size: {x: 1, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4014634812615455438
+--- !u!61 &5874915173595066382
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8898832166787042308}
+  m_GameObject: {fileID: 4367592418800162771}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -122,8 +122,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 1.5, y: 1}
+    oldSize: {x: 10.8, y: 19.2}
+    newSize: {x: 1, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
@@ -131,17 +131,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8797587517389484396
+--- !u!114 &3508309484374812592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8898832166787042308}
+  m_GameObject: {fileID: 4367592418800162771}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f856e36109d2bb04791efccb5ab2979a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
-  _score: 100
+  _score: 200
