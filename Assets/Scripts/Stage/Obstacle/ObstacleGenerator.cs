@@ -1,36 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
+using System;
+using System.Threading;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ObstacleGenerator : MonoBehaviour
 {
     [Header("障害物")]
-    [SerializeField] private ObstacleMove[] _obstacles;
+    [SerializeField] private GameObject[] _obstacles;
     [SerializeField] private float _generateInterval;
     [SerializeField] private Vector2 _generatePos = new Vector2(10, 0);
 
     [SerializeField] private GameSpeedController _gameSpeedController;
 
-
     private async void Start()
     {
-        await GenerateLoop();
+        await GenerateLoop(this.GetCancellationTokenOnDestroy());
     }
 
-    private async UniTask GenerateLoop()
+    private async UniTask GenerateLoop(CancellationToken token)
     {
-        while (true)
+        while (!token.IsCancellationRequested)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(_generateInterval));
-            if (GameStatusController.Current == GameStatus.Play)
+            try
             {
-                GenerateObstacle();
+                await UniTask.Delay(TimeSpan.FromSeconds(_generateInterval), cancellationToken: token);
+                if (GameStatusController.Current == GameStatus.Play)
+                {
+                    GenerateObstacle();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("Cancel");
             }
         }
     }
@@ -38,7 +40,7 @@ public class ObstacleGenerator : MonoBehaviour
     void GenerateObstacle()
     {
         ObstacleMove ob = Instantiate(_obstacles[Random.Range(0, _obstacles.Length)], _generatePos,
-            Quaternion.identity);
+            Quaternion.identity).GetComponent<ObstacleMove>();
         ob.Instantiate(_gameSpeedController.CurrentSpeed);
     }
 }
