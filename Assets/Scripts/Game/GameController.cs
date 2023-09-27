@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
     private PlayerCollisionHandler _playerCollisionHandler;
     [SerializeField]
     private PlayerFallHandler _fallHandler;
+    [SerializeField]
+    private Cinemachine.CinemachineImpulseSource _impulseSource;
 
     private void OnEnable()
     {
@@ -126,6 +128,7 @@ public class GameController : MonoBehaviour
         var deadPos = _player.transform.position;
         var dead = Instantiate(_playerDeadPerformancePrefab, deadPos, Quaternion.identity);
         Destroy(_player);
+        if (_impulseSource) _impulseSource.GenerateImpulse();
         _resultScore.ApplyScore();
         dead.PlayDeadPerformance(() => // プレイヤーの死亡演出。
         _resultDrawer.Play(() => // 演出完了時、リザルト表示演出。
@@ -152,6 +155,7 @@ public class GameController : MonoBehaviour
     private void OnFalled()
     {
         _resultScore.ApplyScore();
+        if (_impulseSource) _impulseSource.GenerateImpulse();
         _resultDrawer.Play(() => // 演出完了時、リザルト表示演出。
         GameStatusController.ChangeGameStatus(GameStatus.End)); // 演出完了時、ステート遷移。
     }

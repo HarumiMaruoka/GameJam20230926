@@ -49,7 +49,7 @@ public class ScoreController : MonoBehaviour
             {
                 _feverGenerator.SetActive(false);
                 _fieldGenerator.SetActive(true);
-                var nextSpeed = _gameSpeedController.CurrentSpeed + 0.1f;
+                var nextSpeed = _gameSpeedController.CurrentSpeed + 0.3f;
                 if (nextSpeed <= 2.0)
                 {
                     _gameSpeedController.ChangeSpeed(nextSpeed);
