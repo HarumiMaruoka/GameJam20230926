@@ -16,11 +16,18 @@ public class PlayerDeadPerformance : MonoBehaviour
     // プレイヤーがやられたときの演出。
     public async void PlayDeadPerformance(Action onComplete = null)
     {
-        _rigidbody2D ??= GetComponent<Rigidbody2D>();
-        _rigidbody2D.velocity = new Vector2(0f, _jumpingPower);
-        await UniTask.WaitUntil(() => transform.position.y < _endYPos,
-            cancellationToken: this.GetCancellationTokenOnDestroy());
-        onComplete?.Invoke();
-        Destroy(this);
+        try
+        {
+            _rigidbody2D ??= GetComponent<Rigidbody2D>();
+            _rigidbody2D.velocity = new Vector2(0f, _jumpingPower);
+            await UniTask.WaitUntil(() => transform.position.y < _endYPos,
+                cancellationToken: this.GetCancellationTokenOnDestroy());
+            onComplete?.Invoke();
+            Destroy(this);
+        }
+        catch (OperationCanceledException)
+        {
+            Debug.Log("Canceled");
+        }
     }
 }

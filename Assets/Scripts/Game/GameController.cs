@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour
     private Text _currentGameStatusText;
     [SerializeField]
     private PlayerCollisionHandler _playerCollisionHandler;
+    [SerializeField]
+    private PlayerFallHandler _fallHandler;
 
     private void OnEnable()
     {
@@ -31,7 +33,9 @@ public class GameController : MonoBehaviour
         if (_collisionHandler)
             _collisionHandler.OnHitObstacle += GameOver;
         if (_playerCollisionHandler)
-            _playerCollisionHandler.OnHitObstacle += PlayEndPerformance;
+            _playerCollisionHandler.OnHitObstacle += OnHitObstacle;
+        if (_fallHandler)
+            _fallHandler.OnFalled += OnFalled;
     }
 
     private void OnDisable()
@@ -40,7 +44,9 @@ public class GameController : MonoBehaviour
         if (_collisionHandler)
             _collisionHandler.OnHitObstacle -= GameOver;
         if (_playerCollisionHandler)
-            _playerCollisionHandler.OnHitObstacle -= PlayEndPerformance;
+            _playerCollisionHandler.OnHitObstacle -= OnHitObstacle;
+        if (_fallHandler)
+            _fallHandler.OnFalled -= OnFalled;
     }
 
     private void Start()
@@ -114,7 +120,7 @@ public class GameController : MonoBehaviour
     private ResultDrawer _resultDrawer;
     [SerializeField]
     private ResultScore _resultScore;
-    private void PlayEndPerformance()
+    private void OnHitObstacle()
     {
         GameStatusController.ChangeGameStatus(GameStatus.EndPerformance);
         var deadPos = _player.transform.position;
@@ -141,5 +147,11 @@ public class GameController : MonoBehaviour
         {
             GameStatusController.ChangeGameStatus(GameStatus.EndPerformance);
         }
+    }
+
+    private void OnFalled()
+    {
+        _resultDrawer.Play(() => // 演出完了時、リザルト表示演出。
+        GameStatusController.ChangeGameStatus(GameStatus.End)); // 演出完了時、ステート遷移。
     }
 }
