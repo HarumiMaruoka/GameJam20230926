@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6888917076504716344}
   - component: {fileID: 2081248681818981490}
   - component: {fileID: 4380213758601648369}
-  - component: {fileID: 1179013845398624193}
+  - component: {fileID: 1584395278122392175}
   m_Layer: 0
   m_Name: Item_Score200
   m_TagString: Untagged
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTag: Player
   _score: 200
---- !u!114 &1179013845398624193
+--- !u!114 &1584395278122392175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,8 +155,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1181558779402521666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daafd10ecc5af84488001f5dc9644006, type: 3}
+  m_Script: {fileID: 11500000, guid: 3669af51b4626134c92ec1ab7d9b361b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _endPos: -10
+  _scrollSpeed: 3.5
+  _deadPos: -20

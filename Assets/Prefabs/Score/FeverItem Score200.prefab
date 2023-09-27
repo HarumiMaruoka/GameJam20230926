@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2759075225399825433}
   - component: {fileID: 5874915173595066382}
   - component: {fileID: 3508309484374812592}
-  - component: {fileID: -4821323969314696074}
+  - component: {fileID: 3544035961130078616}
   m_Layer: 0
   m_Name: FeverItem Score200
   m_TagString: FeverItem
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTag: Player
   _score: 200
---- !u!114 &-4821323969314696074
+--- !u!114 &3544035961130078616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,8 +155,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4367592418800162771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daafd10ecc5af84488001f5dc9644006, type: 3}
+  m_Script: {fileID: 11500000, guid: 3669af51b4626134c92ec1ab7d9b361b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _endPos: -10
+  _scrollSpeed: 3.5
+  _deadPos: -20

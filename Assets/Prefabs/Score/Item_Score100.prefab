@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 482182715020098337}
   - component: {fileID: 4014634812615455438}
   - component: {fileID: 8797587517389484396}
-  - component: {fileID: -4720723371129497992}
+  - component: {fileID: -5348725365567808131}
   m_Layer: 0
   m_Name: Item_Score100
   m_TagString: Untagged
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTag: Player
   _score: 100
---- !u!114 &-4720723371129497992
+--- !u!114 &-5348725365567808131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,8 +155,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8898832166787042308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daafd10ecc5af84488001f5dc9644006, type: 3}
+  m_Script: {fileID: 11500000, guid: 3669af51b4626134c92ec1ab7d9b361b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _endPos: -10
+  _scrollSpeed: 3.5
+  _deadPos: -20
