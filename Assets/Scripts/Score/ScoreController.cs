@@ -12,9 +12,10 @@ public class ScoreController : MonoBehaviour
     [SerializeField] float _feverTime;
     [SerializeField] int _happenFeverCount;
     [SerializeField] Slider _feverSlider;
+    [SerializeField] private GameObject _feverGenerator;
     bool _feverEnabled = false;
     float _scoreItemCount;
-    int _totalScore; //ƒXƒRƒA‚Ì‡Œv
+    int _totalScore; //ï¿½Xï¿½Rï¿½Aï¿½Ìï¿½ï¿½v
     public int Score => _totalScore;
     public bool FeverEnabled => _feverEnabled;
     public void AddScore(int value)
@@ -23,7 +24,7 @@ public class ScoreController : MonoBehaviour
         _totalScore += value;
         StartCoroutine(Enumerator(_startScore, _totalScore));
         //ItemCount();
-    } //ƒAƒCƒeƒ€‚ğæ“¾‚µ‚½‚É_totalScore‚ÉƒXƒRƒA‚ğ’Ç‰Á‚·‚é
+    } //ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_totalScoreï¿½ÉƒXï¿½Rï¿½Aï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
     public void ItemCount()
     {
@@ -33,6 +34,7 @@ public class ScoreController : MonoBehaviour
         if (_scoreItemCount >= _happenFeverCount)
         {
             _feverEnabled = true;
+            _feverGenerator.SetActive(true);
             Invoke(nameof(StartFever), 1f);
             _scoreItemCount = 0;
         }
@@ -42,6 +44,7 @@ public class ScoreController : MonoBehaviour
         _feverSlider.DOValue(0, _feverTime)
             .OnComplete(() =>
             {
+                _feverGenerator.SetActive(false);
                 _feverEnabled = false;
             });
     }
@@ -49,17 +52,17 @@ public class ScoreController : MonoBehaviour
     IEnumerator Enumerator(int startScore, int endScore)
     {
         float startTime = Time.time;
-        // I—¹ŠÔ
+        // ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         float endTime = startTime + _countScoreTimer;
         do
         {
             float timeRate = (Time.time - startTime) / _countScoreTimer;
             float updateValue = (float)((endScore - startScore) * timeRate + startScore);
-            _scoreText.text = updateValue.ToString("00000"); // i"f0" ‚Ì "0" ‚ÍA¬”“_ˆÈ‰º‚ÌŒ…”w’èj
+            _scoreText.text = updateValue.ToString("00000"); // ï¿½i"f0" ï¿½ï¿½ "0" ï¿½ÍAï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½È‰ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ï¿½wï¿½ï¿½j
             yield return null;
         }
         while (Time.time < endTime);
-        // ÅI“I‚È’…’n‚ÌƒXƒRƒA
+        // ï¿½ÅIï¿½Iï¿½È’ï¿½ï¿½nï¿½ÌƒXï¿½Rï¿½A
         _scoreText.text = endScore.ToString("00000");
     }
 }
