@@ -64,11 +64,10 @@ public class ScoreController : MonoBehaviour
         {
             float timeRate = (Time.time - startTime) / _countScoreTimer;
             float updateValue = (float)((endScore - startScore) * timeRate + startScore);
-            _scoreText.text = updateValue.ToString("00000"); // �i"f0" �� "0" �́A�����_�ȉ��̌����w��j
+            _scoreText.text = $"Score: {updateValue.ToString("00000")}"; // �i"f0" �� "0" �́A�����_�ȉ��̌����w��j
             yield return null;
         }
         while (Time.time < endTime);
-        // �ŏI�I�Ȓ��n�̃X�R�A
-        _scoreText.text = endScore.ToString("00000");
+        _scoreText.text = $"Score: {endScore.ToString("00000")}";
     }
 }
