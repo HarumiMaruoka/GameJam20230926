@@ -1,4 +1,5 @@
 using UnityEngine;
+using Glib.InspectorExtension;
 
 public class PlayerJumpController : MonoBehaviour
 {
@@ -6,11 +7,15 @@ public class PlayerJumpController : MonoBehaviour
     [SerializeField] float _jump = 5f;
     //ジャンプの回数制限
     [SerializeField] float _jumpKaisuu = 1f;
+    Animator _animator;
+    [SerializeField, AnimationParameter]
+    private string _jumpParamName;
     Rigidbody2D _rb;
     int _count = 0;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
 
@@ -19,6 +24,7 @@ public class PlayerJumpController : MonoBehaviour
         //スペースを押したらジャンプ
         if (Input.GetKeyDown(KeyCode.Space) && _count < _jumpKaisuu)
         {
+            _animator.SetBool(_jumpParamName, true);
             _rb.velocity = new Vector2(0, _jump);
             _count++;
         }
@@ -27,6 +33,7 @@ public class PlayerJumpController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
+            _animator.SetBool(_jumpParamName, false);
             _count = 0;
         }
     }
