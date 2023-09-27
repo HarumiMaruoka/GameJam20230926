@@ -15,7 +15,7 @@ public class ObstacleMove : MonoBehaviour
 
     public void Instantiate(float mag)
     {
-        _moveSpeed *= mag;
+        _moveSpeed -= mag % 1;
     }
 
     public void Move()

@@ -12,6 +12,7 @@ public class ScoreController : MonoBehaviour
     [SerializeField] float _feverTime;
     [SerializeField] int _happenFeverCount;
     [SerializeField] Slider _feverSlider;
+    [SerializeField] private GameSpeedController _gameSpeedController;
     [SerializeField] private GameObject _feverGenerator;
     bool _feverEnabled = false;
     float _scoreItemCount;
@@ -45,6 +46,11 @@ public class ScoreController : MonoBehaviour
             .OnComplete(() =>
             {
                 _feverGenerator.SetActive(false);
+                var nextSpeed = _gameSpeedController.CurrentSpeed + 0.1f;
+                if (nextSpeed <= 2.0)
+                {
+                    _gameSpeedController.ChangeSpeed(nextSpeed);
+                }
                 _feverEnabled = false;
             });
     }
