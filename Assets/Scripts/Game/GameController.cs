@@ -22,12 +22,16 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     private Text _currentGameStatusText;
+    [SerializeField]
+    private PlayerCollisionHandler _playerCollisionHandler;
 
     private void OnEnable()
     {
         GameStatusController.OnStatusChanged += ApllyCurrentGameStatusText;
         if (_collisionHandler)
             _collisionHandler.OnHitObstacle += GameOver;
+        if (_playerCollisionHandler)
+            _playerCollisionHandler.OnHitObstacle += PlayEndPerformance;
     }
 
     private void OnDisable()
@@ -35,6 +39,8 @@ public class GameController : MonoBehaviour
         GameStatusController.OnStatusChanged -= ApllyCurrentGameStatusText;
         if (_collisionHandler)
             _collisionHandler.OnHitObstacle -= GameOver;
+        if (_playerCollisionHandler)
+            _playerCollisionHandler.OnHitObstacle -= PlayEndPerformance;
     }
 
     private void Start()
@@ -58,17 +64,6 @@ public class GameController : MonoBehaviour
             FadeIn(() => SceneManager.LoadScene(_titleSceneName));
             return;
         }
-
-        if (Input.GetButtonDown(_spaceInputName))
-        {
-            var currentStatus = GameStatusController.Current;
-
-            if (currentStatus == GameStatus.EndPerformance)
-            {
-                Step();
-                return;
-            }
-        }
     }
 
     public void OnDestroy()
@@ -85,36 +80,11 @@ public class GameController : MonoBehaviour
         _fadeImage.DOFade(0f, _fadeTime).OnComplete(() => onComplete?.Invoke());
     }
 
-    private void Step()
-    {
-        var currentStatus = GameStatusController.Current;
-
-        // None→ StartPerformance→ Play→ EndPerformance→ End→ None ...という流れで進行する。
-        switch (currentStatus)
-        {
-            case GameStatus.None:
-                GameStatusController.ChangeGameStatus(GameStatus.StartPerformance);
-                break;
-            case GameStatus.StartPerformance:
-                GameStatusController.ChangeGameStatus(GameStatus.Play);
-                break;
-            case GameStatus.Play:
-                GameStatusController.ChangeGameStatus(GameStatus.EndPerformance);
-                break;
-            case GameStatus.EndPerformance:
-                GameStatusController.ChangeGameStatus(GameStatus.End);
-                break;
-            case GameStatus.End:
-                GameStatusController.ChangeGameStatus(GameStatus.None);
-                break;
-        }
-    }
-
     private float _startPerformanceTimer = 0f;
     private float _startTime = 3f;
     [SerializeField]
     private Text _startPerformanceTimeText;
-    private async void PlayStartPerformance(Action onComplete = null)
+    private async void PlayStartPerformance(Action onComplete = null) // 3.2.1のカウントダウンを表示する。
     {
         _startPerformanceTimeText.gameObject.SetActive(true);
         _startPerformanceTimer = _startTime;
@@ -136,9 +106,24 @@ public class GameController : MonoBehaviour
         _startPerformanceTimeText.gameObject.SetActive(false);
         onComplete?.Invoke();
     }
-    private void PlayEndPerformance(Action onComplete = null)
+    [SerializeField]
+    private GameObject _player;
+    [SerializeField]
+    private PlayerDeadPerformance _playerDeadPerformancePrefab;
+    [SerializeField]
+    private ResultDrawer _resultDrawer;
+    [SerializeField]
+    private ResultScore _resultScore;
+    private void PlayEndPerformance()
     {
-
+        GameStatusController.ChangeGameStatus(GameStatus.EndPerformance);
+        var deadPos = _player.transform.position;
+        var dead = Instantiate(_playerDeadPerformancePrefab, deadPos, Quaternion.identity);
+        Destroy(_player);
+        _resultScore.ApplyScore();
+        dead.PlayDeadPerformance(() => // プレイヤーの死亡演出。
+        _resultDrawer.Play(() => // 演出完了時、リザルト表示演出。
+        GameStatusController.ChangeGameStatus(GameStatus.End))); // 演出完了時、ステート遷移。
     }
 
     private void ApllyCurrentGameStatusText(GameStatus status)
