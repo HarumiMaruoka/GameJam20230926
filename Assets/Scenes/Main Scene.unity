@@ -569,6 +569,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1208868318687366291, guid: fb73c288ec2abaa47b96b23c4056a7c8, type: 3}
+      propertyPath: _gamespeedcontroller
+      value: 
+      objectReference: {fileID: 113845330}
+    - target: {fileID: 2088575427925005769, guid: fb73c288ec2abaa47b96b23c4056a7c8, type: 3}
+      propertyPath: _gamespeedcontroller
+      value: 
+      objectReference: {fileID: 113845330}
     - target: {fileID: 6052053744818738499, guid: fb73c288ec2abaa47b96b23c4056a7c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
