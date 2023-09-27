@@ -29,6 +29,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private Cinemachine.CinemachineImpulseSource _impulseSource;
 
+    [SerializeField]
+    private AudioSource _gameoverSE;
+
     private void OnEnable()
     {
         GameStatusController.OnStatusChanged += ApllyCurrentGameStatusText;
@@ -129,6 +132,7 @@ public class GameController : MonoBehaviour
         var dead = Instantiate(_playerDeadPerformancePrefab, deadPos, Quaternion.identity);
         Destroy(_player);
         if (_impulseSource) _impulseSource.GenerateImpulse();
+        GameOverSound();
         _resultScore.ApplyScore();
         dead.PlayDeadPerformance(() => // プレイヤーの死亡演出。
         _resultDrawer.Play(() => // 演出完了時、リザルト表示演出。
@@ -156,7 +160,13 @@ public class GameController : MonoBehaviour
     {
         _resultScore.ApplyScore();
         if (_impulseSource) _impulseSource.GenerateImpulse();
+        GameOverSound();
         _resultDrawer.Play(() => // 演出完了時、リザルト表示演出。
         GameStatusController.ChangeGameStatus(GameStatus.End)); // 演出完了時、ステート遷移。
+    }
+
+    private void GameOverSound()
+    {
+        _gameoverSE.Play();
     }
 }

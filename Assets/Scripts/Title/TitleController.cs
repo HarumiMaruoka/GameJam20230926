@@ -17,6 +17,7 @@ public class TitleController : MonoBehaviour
     [SerializeField] private float _fadeTime;
 
     [SerializeField] private Animator _startAnim;
+    [SerializeField] private AudioSource _startSE;
     
     private void Start()
     {
@@ -34,6 +35,7 @@ public class TitleController : MonoBehaviour
     {
         if (Input.GetButtonDown(_spaceInputName))
         {
+            _startSE.Play();
             _startAnim.SetBool("IsStart",true);
         }
     }

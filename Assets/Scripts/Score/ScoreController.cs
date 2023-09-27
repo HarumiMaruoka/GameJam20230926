@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+using System.Linq;
 
 public class ScoreController : MonoBehaviour
 {
@@ -13,8 +14,12 @@ public class ScoreController : MonoBehaviour
     [SerializeField] int _happenFeverCount;
     [SerializeField] Slider _feverSlider;
     [SerializeField] private GameSpeedController _gameSpeedController;
+    [SerializeField] private AudioSource _getSound;
+    [SerializeField] private AudioSource _mainBGM;
+    [SerializeField] private AudioSource _feverBGM;
     [SerializeField] private GameObject _fieldGenerator;
     [SerializeField] private GameObject _feverGenerator;
+    [SerializeField] ParticleSystem[] _feverParticle;
     bool _feverEnabled = false;
     float _scoreItemCount;
     int _totalScore; //�X�R�A�̍��v
@@ -22,6 +27,7 @@ public class ScoreController : MonoBehaviour
     public bool FeverEnabled => _feverEnabled;
     public void AddScore(int value)
     {
+        _getSound.Play();
         int _startScore = _totalScore;
         _totalScore += value;
         StartCoroutine(Enumerator(_startScore, _totalScore));
@@ -38,17 +44,25 @@ public class ScoreController : MonoBehaviour
             _feverEnabled = true;
             _feverGenerator.SetActive(true);
             _fieldGenerator.SetActive(false);
+            _feverBGM.Play();
+            _mainBGM.Stop();
             Invoke(nameof(StartFever), 1f);
             _scoreItemCount = 0;
         }
     }
     void StartFever()
     {
+        foreach (var particle in _feverParticle)
+        {
+            particle.Play();
+        }
         _feverSlider.DOValue(0, _feverTime)
             .OnComplete(() =>
             {
                 _feverGenerator.SetActive(false);
                 _fieldGenerator.SetActive(true);
+                _feverBGM.Stop();
+                _mainBGM.Play();
                 var nextSpeed = _gameSpeedController.CurrentSpeed + 0.3f;
                 if (nextSpeed <= 2.0)
                 {

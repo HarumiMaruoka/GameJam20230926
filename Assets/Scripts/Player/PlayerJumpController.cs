@@ -8,6 +8,7 @@ public class PlayerJumpController : MonoBehaviour
     //ƒWƒƒƒ“ƒv‚Ì‰ñ”§ŒÀ
     [SerializeField] float _jumpKaisuu = 1f;
     Animator _animator;
+    [SerializeField] private AudioSource _audioSource;
     [SerializeField, AnimationParameter]
     private string _jumpParamName;
     Rigidbody2D _rb;
@@ -27,6 +28,7 @@ public class PlayerJumpController : MonoBehaviour
             _animator.SetBool(_jumpParamName, true);
             _rb.velocity = new Vector2(0, _jump);
             _count++;
+            _audioSource.Play();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
