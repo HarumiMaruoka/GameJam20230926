@@ -151,6 +151,7 @@ public class GameController : MonoBehaviour
 
     private void OnFalled()
     {
+        _resultScore.ApplyScore();
         _resultDrawer.Play(() => // 演出完了時、リザルト表示演出。
         GameStatusController.ChangeGameStatus(GameStatus.End)); // 演出完了時、ステート遷移。
     }
