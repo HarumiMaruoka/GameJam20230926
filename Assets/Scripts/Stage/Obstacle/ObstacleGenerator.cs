@@ -13,6 +13,7 @@ public class ObstacleGenerator : MonoBehaviour
 
     [SerializeField] private GameSpeedController _gameSpeedController;
 
+    [SerializeField] private ScoreController _scoreController;
     private async void Start()
     {
         await GenerateLoop(this.GetCancellationTokenOnDestroy());
@@ -39,8 +40,11 @@ public class ObstacleGenerator : MonoBehaviour
 
     void GenerateObstacle()
     {
-        ObstacleMove ob = Instantiate(_obstacles[Random.Range(0, _obstacles.Length)], _generatePos,
-            Quaternion.identity).GetComponent<ObstacleMove>();
-        ob.Instantiate(_gameSpeedController.CurrentSpeed);
+        if (!_scoreController.FeverEnabled)
+        {
+            Instantiate(_obstacles[Random.Range(0, _obstacles.Length)], _generatePos,
+           Quaternion.identity);
+        }
+
     }
 }
