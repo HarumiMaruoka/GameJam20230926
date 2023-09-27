@@ -30,7 +30,7 @@ public class ObstacleGenerator : MonoBehaviour
                     GenerateObstacle();
                 }
             }
-            catch (OperationCanceledException ex)
+            catch (OperationCanceledException)
             {
                 Debug.Log("Cancel");
             }
