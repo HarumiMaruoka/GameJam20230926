@@ -1686,6 +1686,7 @@ MonoBehaviour:
   _fadeTime: 0.6
   _currentGameStatusText: {fileID: 1708350655}
   _playerCollisionHandler: {fileID: 1387103655}
+  _fallHandler: {fileID: 1387103663}
   _startPerformanceTimeText: {fileID: 629870202}
   _player: {fileID: 111098671}
   _playerDeadPerformancePrefab: {fileID: 1467359696755960173, guid: 94871c964572c914f851adab4178e296, type: 3}
@@ -1738,6 +1739,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1387103663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111098671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d7fabc91ed48549bae856a09f1b7ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _falledYPos: -5.5
 --- !u!1 &1585317452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,6 +2733,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4598471302878402476, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1387103662}
+    - targetCorrespondingSourceObject: {fileID: 4598471302878402476, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1387103663}
   m_SourcePrefab: {fileID: 100100000, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
