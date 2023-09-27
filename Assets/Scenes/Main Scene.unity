@@ -1869,6 +1869,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ca8e33a6970f241af4c5081abda654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1387103662
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111098671}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dd72bc0a1e1a77243a3d45f08fe0f072, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1703129737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,11 +2592,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1192072381115570315, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 2
+      value: 2.07
       objectReference: {fileID: 0}
     - target: {fileID: 1192072381115570315, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 4.06
+      value: 3.85
       objectReference: {fileID: 0}
     - target: {fileID: 1192072381115570315, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -2659,11 +2680,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4649599984007368773, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 2
+      value: 2.07
       objectReference: {fileID: 0}
     - target: {fileID: 4649599984007368773, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 4.06
+      value: 3.85
       objectReference: {fileID: 0}
     - target: {fileID: 4649599984007368773, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -2692,7 +2713,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4598471302878402476, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1387103662}
   m_SourcePrefab: {fileID: 100100000, guid: d382becccdfc51f49a02d7d4f046905d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
