@@ -19,11 +19,13 @@ public class BackGroundController : MonoBehaviour
     private void OnEnable()
     {
         ApplySpeedrate(_gamespeedcontroller.CurrentSpeed);
-        _gamespeedcontroller.OnSpeedChanged += ApplySpeedrate;
+        if (_gamespeedcontroller)
+            _gamespeedcontroller.OnSpeedChanged += ApplySpeedrate;
     }
     private void OnDisable()
     {
-        _gamespeedcontroller.OnSpeedChanged -= ApplySpeedrate;
+        if (_gamespeedcontroller)
+            _gamespeedcontroller.OnSpeedChanged -= ApplySpeedrate;
     }
     void Update()
     {
