@@ -144,7 +144,7 @@ MonoBehaviour:
   - {fileID: 446281458563027726, guid: 97b8b957fb0766b47966bb9a128b49a5, type: 3}
   - {fileID: 4367592418800162771, guid: 76aab643acabfe84c8eb4b7e52c80e89, type: 3}
   _generateInterval: 1
-  _generatePos: {x: 10, y: -13}
+  _generatePos: {x: 10, y: -3}
   _gameSpeedController: {fileID: 113845330}
   _scoreController: {fileID: 1703129739}
 --- !u!1 &75568336
